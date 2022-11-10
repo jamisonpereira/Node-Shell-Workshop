@@ -2,9 +2,15 @@ process.stdout.write('prompt > ');
 
 const pwd = require('./pwd');
 const ls = require('./ls');
+const cat = require('./cat');
 
 process.stdin.on('data', (data) => {
-  const cmd = data.toString().trim(); //remove the newline
+  const arr = data.toString().trim().split(' ');
+  const cmd = arr[0];
+  const fileName = arr[1];
+  if (cmd === 'cat') {
+    cat(fileName);
+  }
   if (cmd === 'pwd') {
     process.stdout.write(pwd());
   }
@@ -12,3 +18,7 @@ process.stdin.on('data', (data) => {
     ls();
   }
 });
+
+const done = (output) => {
+
+};
